@@ -1,1 +1,30 @@
+body {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+}
 
+.box {
+    background-color: #92eda2;
+    border: 1px solid #030000;
+    border-radius: 5px;
+    padding: 20px;
+    margin-right: 10px;
+    display: inline-block;
+    width: 100px; 
+    height: 100px; 
+}
+
+.day {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.weather-box {
+    background-color: #a09eea;
+    border: 1px solid #020000;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 10px;
+    width: 100px; 
+    height: 100px; 
+}
