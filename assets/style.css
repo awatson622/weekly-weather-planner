@@ -11,6 +11,8 @@ body {
 }
 
 .day {
+    background-color: rgb(195, 223, 247);
+    border: 1px solid black;
     margin-bottom: 10px;
     text-align: left;
  }
@@ -56,3 +58,17 @@ body {
     margin: auto;
 }
 
+
+.road-conditions {
+    background-color: #bcfdd0; 
+    border: 1px solid #070000; 
+    border-radius: 5px; 
+    padding: 10px; 
+    margin-top: 10px; 
+    width: 100%; 
+}
+
+.road-conditions h4 {
+    margin-bottom: 5px; 
+    font-size: 16px; 
+}
