@@ -46,8 +46,34 @@ function getWeather(latitude, longitude) {
     })
 }
 
-function printResults() {
-    
+function printResults(resultObj) {
+    var weatherCard = document.createElement('div');
+    weatherCard.classList.add('card');
+
+    var weatherBody = document.createElement('div');
+    weatherBody.classList.add('card-body');
+
+    var cardDate = document.createElement('h4');
+    cardDate.classList.add('card-date');
+    var date = resultObj.dt_txt;
+    date = date.split(' ').shift();
+    cardDate.textContent = date;
+
+    var temp = document.createElement('div');
+    temp.textContent = "Temperature: " + resultObj.main.temp + "\u00B0 F";   
+
+    var humidity = document.createElement('div');
+    humidity.textContent = 'Humidity: ' + resultObj.main.humidity + "%";    
+
+    var windSpeed = document.createElement('div');
+    windSpeed.textContent = 'Wind: ' + resultObj.wind.speed + ' mph';  
+
+    weatherBody.append(cardDate);
+    weatherBody.append(temp);
+    weatherBody.append(humidity);
+    weatherBody.append(windSpeed);
+    weatherCard.append(weatherBody);
+    weatherEl.append(weatherCard);
 }
 
 
