@@ -8,6 +8,7 @@ getLocation = function () {
     var apiEndpointLocation = 
     "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + ",CA,US-CA&limit=5&appid=" + apiKey;
 
+
     fetch(apiEndpointLocation)
     .then(function(response) {
         return response.json();
@@ -18,7 +19,6 @@ getLocation = function () {
         latitude = data[0].lat;
     });
 }
-console.log(longitude, latitude);
 
 function getWeather() {
     var weatherCall = 'https://api.openweathermap.org/data/3.0/onecall?lat=' + 
@@ -38,6 +38,7 @@ function getWeather() {
     })
 }
 
+
 getLocation();
 
 getRoadCondition = function () {
@@ -47,5 +48,9 @@ getRoadCondition = function () {
     fetch(apiEndpointRoadCondition)
     .then(function(response) {
         return response.json();
+    })
+    .then(function(response) {
+        console.log(data);
+
     });
 }
