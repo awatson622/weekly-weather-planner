@@ -1,14 +1,17 @@
 var longitude;
 var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
-var cityName = document.getElementById("city-input");
-var roadAlertsName; 
-var roadAlertsLevel;
+
+function getParams() {
+    var searchParameters = document.location.search.split('=');
+    var cityName = searchParameters[1];
+    getLocation(cityName);
+}
 
 
-getLocation = function () {
+getLocation = function (cityName) {
     var apiEndpointLocation = 
-    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + ",CA,US-CA&limit=5&appid=" + apiKey;
+    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
 
 
     fetch(apiEndpointLocation)
@@ -19,12 +22,14 @@ getLocation = function () {
         console.log(data);
         longitude = data[0].lat;
         latitude = data[0].lat;
+        console.log(longitude, latitude);
+        getWeather(latitude, longitude);
     });
 }
 
-function getWeather() {
-    var weatherCall = 'https://api.openweathermap.org/data/3.0/onecall?lat=' + 
-    latitude + '&lon=' + longitude + '&units=imperial';
+function getWeather(latitude, longitude) {
+    var weatherCall = 'https://api.openweathermap.org/data/3.0/onecall?lat='
+    + latitude + '&lon=' + longitude + '&appid=' + apiKey;
 
     fetch(weatherCall)
     .then(function(response) {
@@ -34,14 +39,13 @@ function getWeather() {
 
         return response.json();
     })
-    .then(function(data) {
-        console.log(data);
+    .then(function(response) {
+        console.log(response);
         
     })
 }
 
 
-getLocation();
 
 getRoadCondition = function () {
     var apiEndpointRoadCondition = 
@@ -58,3 +62,5 @@ getRoadCondition = function () {
         
     });
 }
+
+getParams();
