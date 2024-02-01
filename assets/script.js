@@ -2,6 +2,8 @@ var longitude;
 var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
 var cityName = document.getElementById("city-input");
+var roadAlertsName; 
+var roadAlertsLevel;
 
 
 getLocation = function () {
@@ -15,7 +17,7 @@ getLocation = function () {
     })
     .then(function(data) {
         console.log(data);
-        longitude = data[0].lon;
+        longitude = data[0].lat;
         latitude = data[0].lat;
     });
 }
@@ -32,8 +34,8 @@ function getWeather() {
 
         return response.json();
     })
-    .then(function(resp) {
-        console.log(resp);
+    .then(function(data) {
+        console.log(data);
         
     })
 }
@@ -49,8 +51,10 @@ getRoadCondition = function () {
     .then(function(response) {
         return response.json();
     })
-    .then(function(response) {
+    .then(function(data) {
         console.log(data);
-
+        roadAlertsName = data[0].alerts.event;
+        roadAlertsLevel = data[0].alerts.event_level;
+        
     });
 }
