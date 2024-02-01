@@ -15,11 +15,11 @@ getLocation = function () {
         console.log(data);
         longitude = data[0].lon;
         latitude = data[0].lat;
+        getWeather(latitude, longitude);
     });
 }
-console.log(longitude, latitude);
 
-function getWeather() {
+function getWeather(latitude, longitude) {
     var weatherCall = 'https://api.openweathermap.org/data/3.0/onecall?lat=' + 
     latitude + '&lon=' + longitude + '&units=imperial';
 
