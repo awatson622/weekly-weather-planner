@@ -28,7 +28,7 @@ getLocation = function (cityName) {
 
 function getWeather(latitude, longitude) {
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat='
-    + latitude + '&lon=' + longitude + '&appid=' + apiKey;
+    + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=imperial';
 
     fetch(weatherCall)
     .then(function(response) {
