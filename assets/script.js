@@ -20,8 +20,7 @@ getLocation = function () {
 }
 
 function getWeather(latitude, longitude) {
-    var weatherCall = 'https://api.openweathermap.org/data/3.0/onecall?lat=' + 
-    latitude + '&lon=' + longitude + '&units=imperial';
+    var weatherCall = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey;
 
     fetch(weatherCall)
     .then(function(response) {
