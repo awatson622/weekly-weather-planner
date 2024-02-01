@@ -1,5 +1,5 @@
-var longitude
-var latitude
+var longitude;
+var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
 var cityName = document.getElementById("city-input");
 
@@ -18,8 +18,25 @@ getLocation = function () {
         latitude = data[0].lat;
     });
 }
+console.log(longitude, latitude);
 
+function getWeather() {
+    var weatherCall = 'https://api.openweathermap.org/data/3.0/onecall?lat=' + 
+    latitude + '&lon=' + longitude + '&units=imperial';
 
+    fetch(weatherCall)
+    .then(function(response) {
+        if(!response.ok) {
+            throw response.json();
+        }
+
+        return response.json();
+    })
+    .then(function(resp) {
+        console.log(resp);
+        
+    })
+}
 
 getLocation();
 
