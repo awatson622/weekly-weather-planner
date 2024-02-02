@@ -81,19 +81,6 @@ function printResults(resultObj) {
     weatherEl.append(weatherCard);
 }
 
-getTrafficCondition = function () {
-    var apiEndpointRoadCondition = 
-    "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/8/json?key=" + apiKeyTT + "&point=" + latitude + "," + longitude + "&unit=mph&thickness=10&openLr=false&jsonp=jsonp";
-    
-    fetch(apiEndpointRoadCondition)
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-    });
-}
-
 function getTrafficCondition(latitude, longitude) {
     var roadConditions = "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/8/json?key=" + apiKeyTT + "&point=" 
     + latitude + "," + longitude + "&unit=mph&thickness=10&openLr=false&jsonp=jsonp";
@@ -106,8 +93,8 @@ function getTrafficCondition(latitude, longitude) {
 
         return response.json();
     })
-    .then(function(response) {
-        console.log(response.list); 
+    .then(function(data) {
+        console.log(data); 
     });
 }
 
