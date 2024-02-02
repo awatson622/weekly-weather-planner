@@ -2,24 +2,11 @@ var longitude;
 var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
 var weatherEl = document.querySelector('.weather-box');
+var apiKeyOW = "116b45a117c031423a95336301ac4350";
+var apiKeyTT = "MEJtiG9BcewPsAMQr2nPUpuYTEeThwmY";
+var weatherEl = document.querySelector('#weather-forecast');
 
-function updateDates() {
-    var days = document.querySelectorAll('.day');
-  
-    var currentDate = dayjs();
-    var startOfWeek = currentDate.startOf('week');
-  
-    days.forEach(function(day, index) {
-        var dayHeader = day.querySelector('.day-header');
-        var dateElement = document.createElement('div');
-        var date = startOfWeek.add(index, 'day').format('dddd MMMM DD, YYYY');
 
-        dateElement.textContent = date;
-        dayHeader.appendChild(dateElement);
-    });
-}
-
-updateDates();
 
 function getParams() {
     var searchParameters = document.location.search.split('=');
@@ -30,7 +17,8 @@ function getParams() {
 
 getLocation = function (cityName) {
     var apiEndpointLocation = 
-    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKeyOW;
+
 
     fetch(apiEndpointLocation)
     .then(function(response) {
@@ -40,12 +28,13 @@ getLocation = function (cityName) {
         longitude = data[0].lon;
         latitude = data[0].lat;
         getWeather(latitude, longitude);
+        getTrafficCondition(latitude, longitude);
     });
 }
 
 function getWeather(latitude, longitude) {
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat='
-    + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=imperial';
+    + latitude + '&lon=' + longitude + '&appid=' + apiKeyOW + '&units=imperial';
 
     fetch(weatherCall)
     .then(function(response) {
@@ -105,14 +94,22 @@ function getWeatherIcon (weatherIcon) {
     return icon;
 }
 
-getRoadCondition = function () {
-    var apiEndpointRoadCondition = 
-    "https://api.openweathermap.org/data/2.5/roadrisk?appid=" + apiKey;
-    
-    fetch(apiEndpointRoadCondition)
+function getTrafficCondition(latitude, longitude) {
+    var roadConditions = "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/8/json?key=" + apiKeyTT + "&point=" 
+    + latitude + "," + longitude + "&unit=mph&thickness=10&openLr=false&jsonp=jsonp";
+
+    fetch(roadConditions)
     .then(function(response) {
+        if(!response.ok) {
+            throw response.json();
+        }
+
         return response.json();
+    })
+    .then(function(data) {
+        console.log(data); 
     });
 }
+
 
 getParams();
