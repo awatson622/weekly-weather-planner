@@ -3,6 +3,8 @@ var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
 var weatherEl = document.querySelector('#weather-forecast');
 
+
+
 function getParams() {
     var searchParameters = document.location.search.split('=');
     var cityName = searchParameters[1];
@@ -75,8 +77,6 @@ function printResults(resultObj) {
     weatherCard.append(weatherBody);
     weatherEl.append(weatherCard);
 }
-
-
 
 getRoadCondition = function () {
     var apiEndpointRoadCondition = 
