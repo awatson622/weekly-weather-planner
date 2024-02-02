@@ -1,5 +1,7 @@
 var longitude;
 var latitude;
+
+
 var apiKey = "116b45a117c031423a95336301ac4350";
 var weatherEl = document.querySelector('.weather-box');
 
