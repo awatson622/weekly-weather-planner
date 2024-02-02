@@ -3,7 +3,23 @@ var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
 var weatherEl = document.querySelector('#weather-forecast');
 
+function updateDates() {
+    var days = document.querySelectorAll('.day');
+  
+    var currentDate = dayjs();
+    var startOfWeek = currentDate.startOf('week');
+  
+    days.forEach(function(day, index) {
+        var dayHeader = day.querySelector('.day-header');
+        var dateElement = document.createElement('div');
+        var date = startOfWeek.add(index, 'day').format('dddd MMMM DD, YYYY');
 
+        dateElement.textContent = date;
+        dayHeader.appendChild(dateElement);
+    });
+}
+
+updateDates();
 
 function getParams() {
     var searchParameters = document.location.search.split('=');
