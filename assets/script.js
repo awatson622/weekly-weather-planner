@@ -1,7 +1,7 @@
 var longitude;
 var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
-var weatherEl = document.querySelector('#weather-forecast');
+var weatherEl = document.querySelector('.weather-box');
 
 function updateDates() {
     var days = document.querySelectorAll('.day');
@@ -57,7 +57,7 @@ function getWeather(latitude, longitude) {
     })
     .then(function(response) {
         console.log(response.list);
-        for (var i = 3; i < response.list.length; i += 8) {
+        for (var i = 1; i < 5; i++) {
             printResults(response.list[i]);
         }
         
@@ -74,24 +74,35 @@ function printResults(resultObj) {
     var cardDate = document.createElement('h4');
     cardDate.classList.add('card-date');
     var date = resultObj.dt_txt;
-    date = date.split(' ').shift();
     cardDate.textContent = date;
+
+    var weatherIcon = resultObj.weather[0].icon;
+    var iconUrl = getWeatherIcon(weatherIcon);
+
+    var iconImg = document.createElement('img');
+    iconImg.src = iconUrl;
 
     var temp = document.createElement('div');
     temp.textContent = "Temperature: " + resultObj.main.temp + "\u00B0 F";   
 
-    var humidity = document.createElement('div');
-    humidity.textContent = 'Humidity: ' + resultObj.main.humidity + "%";    
+    var clouds = document.createElement('div');
+    clouds.textContent = "Clouds: " + resultObj.clouds.all + "% cloud coverage.";
 
     var windSpeed = document.createElement('div');
     windSpeed.textContent = 'Wind: ' + resultObj.wind.speed + ' mph';  
 
     weatherBody.append(cardDate);
+    weatherBody.append(iconImg);
     weatherBody.append(temp);
-    weatherBody.append(humidity);
+    weatherBody.append(clouds);
     weatherBody.append(windSpeed);
     weatherCard.append(weatherBody);
     weatherEl.append(weatherCard);
+}
+
+function getWeatherIcon (weatherIcon) {
+    var icon = 'https://openweathermap.org/img/wn/' + weatherIcon + "@2x.png";
+    return icon;
 }
 
 getRoadCondition = function () {
