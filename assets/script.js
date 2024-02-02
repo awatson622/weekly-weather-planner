@@ -15,7 +15,7 @@ function getParams() {
 
 getLocation = function (cityName) {
     var apiEndpointLocation = 
-    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKeyOW;
 
 
     fetch(apiEndpointLocation)
@@ -26,12 +26,13 @@ getLocation = function (cityName) {
         longitude = data[0].lon;
         latitude = data[0].lat;
         getWeather(latitude, longitude);
+        getTrafficCondition(latitude, longitude);
     });
 }
 
 function getWeather(latitude, longitude) {
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat='
-    + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=imperial';
+    + latitude + '&lon=' + longitude + '&appid=' + apiKeyOW + '&units=imperial';
 
     fetch(weatherCall)
     .then(function(response) {
@@ -87,7 +88,28 @@ getTrafficCondition = function () {
     fetch(apiEndpointRoadCondition)
     .then(function(response) {
         return response.json();
+    })
+    .then(function(data) {
+        console.log(data);
     });
 }
+
+function getTrafficCondition(latitude, longitude) {
+    var roadConditions = "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/8/json?key=" + apiKeyTT + "&point=" 
+    + latitude + "," + longitude + "&unit=mph&thickness=10&openLr=false&jsonp=jsonp";
+
+    fetch(roadConditions)
+    .then(function(response) {
+        if(!response.ok) {
+            throw response.json();
+        }
+
+        return response.json();
+    })
+    .then(function(response) {
+        console.log(response.list); 
+    });
+}
+
 
 getParams();
