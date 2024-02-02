@@ -4,9 +4,25 @@ var apiKey = "116b45a117c031423a95336301ac4350";
 var weatherEl = document.querySelector('.weather-box');
 var apiKeyOW = "116b45a117c031423a95336301ac4350";
 var apiKeyTT = "MEJtiG9BcewPsAMQr2nPUpuYTEeThwmY";
-var weatherEl = document.querySelector('#weather-forecast');
+var weatherEl = document.querySelector('.weather-box');
 
+function updateDates() {
+    var days = document.querySelectorAll('.day');
+  
+    var currentDate = dayjs();
+    var startOfWeek = currentDate.startOf('week');
+  
+    days.forEach(function(day, index) {
+        var dayHeader = day.querySelector('.day-header');
+        var dateElement = document.createElement('div');
+        var date = startOfWeek.add(index, 'day').format('dddd MMMM DD, YYYY');
 
+        dateElement.textContent = date;
+        dayHeader.appendChild(dateElement);
+    });
+}
+
+updateDates();
 
 function getParams() {
     var searchParameters = document.location.search.split('=');
@@ -34,7 +50,7 @@ getLocation = function (cityName) {
 
 function getWeather(latitude, longitude) {
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat='
-    + latitude + '&lon=' + longitude + '&appid=' + apiKeyOW + '&units=imperial';
+    + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=imperial';
 
     fetch(weatherCall)
     .then(function(response) {
@@ -49,7 +65,6 @@ function getWeather(latitude, longitude) {
         for (var i = 1; i < 5; i++) {
             printResults(response.list[i]);
         }
-        
     })
 }
 
