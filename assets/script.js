@@ -80,9 +80,9 @@ function printResults(resultObj) {
     weatherEl.append(weatherCard);
 }
 
-getRoadCondition = function () {
+getTrafficCondition = function () {
     var apiEndpointRoadCondition = 
-    "https://api.openweathermap.org/data/2.5/roadrisk?appid=" + apiKey;
+    "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/8/json?key=" + apiKeyTT + "&point=" + latitude + "," + longitude + "&unit=mph&thickness=10&openLr=false&jsonp=jsonp";
     
     fetch(apiEndpointRoadCondition)
     .then(function(response) {
