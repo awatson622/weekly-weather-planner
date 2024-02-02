@@ -3,6 +3,8 @@ var latitude;
 var apiKey = "116b45a117c031423a95336301ac4350";
 var weatherEl = document.querySelector('#weather-forecast');
 
+
+
 function getParams() {
     var searchParameters = document.location.search.split('=');
     var cityName = searchParameters[1];
@@ -77,5 +79,14 @@ function printResults(resultObj) {
     weatherEl.append(weatherCard);
 }
 
+getRoadCondition = function () {
+    var apiEndpointRoadCondition = 
+    "https://api.openweathermap.org/data/2.5/roadrisk?appid=" + apiKey;
+    
+    fetch(apiEndpointRoadCondition)
+    .then(function(response) {
+        return response.json();
+    });
+}
 
 getParams();
