@@ -1,3 +1,6 @@
+var enterCityModal=document.querySelector('#myModal');
+
+
 var cityFormEl = document.querySelector('#city-form');
 
 function handleCityFormSubmit(event) {
