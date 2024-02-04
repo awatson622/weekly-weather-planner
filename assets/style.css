@@ -44,16 +44,19 @@ h1 {
     border: 1px solid black;
     margin-bottom: 10px;
     text-align: left;
- }
+}
  
- .weather-box {
+.weather-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     background-color: #c8c7ed;
     border: 1px solid #020000;
     border-radius: 5px;
     padding: 20px;
     margin-top: 10px;
     width: 100%;
-    height: 100px;
+    height: fit-content;
 }
  
 #task-input {
@@ -128,4 +131,9 @@ h1 {
 
 .enter-city:hover {
     background-color: #555;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
 }
