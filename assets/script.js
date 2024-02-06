@@ -152,6 +152,7 @@ function resultsTraffic(data) {
     trafficCard.classList.add('card');
 
     var trafficBody = document.createElement('div');
+    trafficBody.setAttribute("style", "background-color: #bcfdd0; font-weight: bold");
     trafficBody.classList.add('card-body');
 
     var trafficSpeed = document.createElement('div');
@@ -160,8 +161,12 @@ function resultsTraffic(data) {
     var roadClosed = document.createElement('div');
     if (data.flowSegmentData.roadClosure = true) {
         roadClosed.textContent = "There is currently road closures in your area.";
+        roadClosed.style.textDecoration = "underline";
+        roadClosed.style.color = "red";
     } else {
         roadClosed.textContent = "There are currently no road closures in your area.";
+        roadClosed.style.textDecoration = "underline";
+        roadClosed.style.color = "#006421";
     }
     
     
