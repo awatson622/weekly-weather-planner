@@ -4,17 +4,15 @@ var apiKey = "116b45a117c031423a95336301ac4350";
 var weatherEl = document.querySelector('.weather-box');
 var apiKeyOW = "116b45a117c031423a95336301ac4350";
 var apiKeyTT = "MEJtiG9BcewPsAMQr2nPUpuYTEeThwmY";
-var weatherEl = document.querySelector('.weather-box');
+var days = document.querySelectorAll('.day');
+var currentDate = dayjs();
+var startOfWeek = currentDate.startOf('week');
 
 function updateDates() {
-    var days = document.querySelectorAll('.day');
-  
-    var currentDate = dayjs();
-    var startOfWeek = currentDate.startOf('week');
-  
     days.forEach(function(day, index) {
         var dayHeader = day.querySelector('.day-header');
         var dateElement = document.createElement('div');
+        dateElement.classList.add ('date');
         var date = startOfWeek.add(index, 'day').format('dddd MMMM DD, YYYY');
 
         dateElement.textContent = date;
@@ -62,7 +60,19 @@ function getWeather(latitude, longitude) {
     })
     .then(function(response) {
         console.log(response.list);
-        for (var i = 1; i < 5; i++) {
+        for (var i = 2; i < 6; i++) {
+            printResults(response.list[i]);
+        }
+        for (var i = 10; i < 14; i++) {
+            printResults(response.list[i]);
+        }
+        for (var i = 18; i < 22; i++) {
+            printResults(response.list[i]);
+        }
+        for (var i = 26; i < 30; i++) {
+            printResults(response.list[i]);
+        }
+        for (var i = 34; i < 38; i++) {
             printResults(response.list[i]);
         }
     })
@@ -102,6 +112,10 @@ function printResults(resultObj) {
     weatherBody.append(windSpeed);
     weatherCard.append(weatherBody);
     weatherEl.append(weatherCard);
+    days.forEach(function(day, index) {
+        var weatherContainer = day.querySelector('.weather-box');
+
+    })
 }
 
 function getWeatherIcon (weatherIcon) {
