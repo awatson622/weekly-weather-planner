@@ -1,7 +1,5 @@
 var longitude;
 var latitude;
-var apiKey = "116b45a117c031423a95336301ac4350";
-var weatherEl = document.querySelector('.weather-box');
 var apiKeyOW = "116b45a117c031423a95336301ac4350";
 var apiKeyTT = "MEJtiG9BcewPsAMQr2nPUpuYTEeThwmY";
 var weatherEl = document.querySelector('.weather-box');
@@ -50,7 +48,7 @@ getLocation = function (cityName) {
 
 function getWeather(latitude, longitude) {
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat='
-    + latitude + '&lon=' + longitude + '&appid=' + apiKey + '&units=imperial';
+    + latitude + '&lon=' + longitude + '&appid=' + apiKeyOW + '&units=imperial';
 
     fetch(weatherCall)
     .then(function(response) {
@@ -121,10 +119,32 @@ function getTrafficCondition(latitude, longitude) {
 
         return response.json();
     })
-    .then(function(data) {
-        console.log(data); 
+    .then(function(response) {
+        console.log(response);
+        resultsTraffic(response);
+        
     });
 }
 
+function resultsTraffic(response) {
+    var trafficCard = document.createElement('div');
+    trafficCard.classList.add('card');
+
+    var trafficBody = document.createElement('div');
+    trafficBody.classList.add('card-body');
+
+    var trafficSpeed = document.createElement('div');
+    trafficSpeed.textContent = "Current Traffic Speed: " + response.currentSpeed + "mph.";
+
+    var roadClosed = document.createElement('div');
+    if (response.roadClosure = true) {
+        roadClosed.textContent = "There is currently road closures in your area.";
+    } else {
+        roadClosed.textContent = "There are currently no road closures in your area.";
+    }
+    
+    trafficBody.append(trafficSpeed);
+    trafficBody.append(roadClosed);
+}
 
 getParams();
