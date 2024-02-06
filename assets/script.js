@@ -146,6 +146,8 @@ function getTrafficCondition(latitude, longitude) {
 }
 
 function resultsTraffic(data) {
+    var trafficContainer = document.querySelectorAll('.road-conditions');
+
     var trafficCard = document.createElement('div');
     trafficCard.classList.add('card');
 
@@ -153,17 +155,21 @@ function resultsTraffic(data) {
     trafficBody.classList.add('card-body');
 
     var trafficSpeed = document.createElement('div');
-    trafficSpeed.textContent = "Current Traffic Speed: " + data.currentSpeed + "mph.";
+    trafficSpeed.textContent = "Current Traffic Speed: " + data.flowSegmentData.currentSpeed + "mph.";
 
     var roadClosed = document.createElement('div');
-    if (data.roadClosure = true) {
+    if (data.flowSegmentData.roadClosure = true) {
         roadClosed.textContent = "There is currently road closures in your area.";
     } else {
         roadClosed.textContent = "There are currently no road closures in your area.";
     }
     
+    
     trafficBody.append(trafficSpeed);
     trafficBody.append(roadClosed);
+    trafficCard.append(trafficBody);
+    trafficContainer[currentDate.day()].appendChild(trafficCard);
+
 }
 
 getParams();
