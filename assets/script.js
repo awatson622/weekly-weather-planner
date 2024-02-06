@@ -10,6 +10,7 @@ function updateDates() {
     days.forEach(function(day, index) {
         var dayHeader = day.querySelector('.day-header');
         var dateElement = document.createElement('div');
+        dateElement.style.fontWeight = 'bold';
         dateElement.classList.add ('date');
         var date = startOfWeek.add(index, 'day').format('dddd MMMM DD, YYYY');
 
