@@ -126,7 +126,7 @@ function getTrafficCondition(latitude, longitude) {
     });
 }
 
-function resultsTraffic(response) {
+function resultsTraffic(data) {
     var trafficCard = document.createElement('div');
     trafficCard.classList.add('card');
 
@@ -134,10 +134,10 @@ function resultsTraffic(response) {
     trafficBody.classList.add('card-body');
 
     var trafficSpeed = document.createElement('div');
-    trafficSpeed.textContent = "Current Traffic Speed: " + response.currentSpeed + "mph.";
+    trafficSpeed.textContent = "Current Traffic Speed: " + data.currentSpeed + "mph.";
 
     var roadClosed = document.createElement('div');
-    if (response.roadClosure = true) {
+    if (data.roadClosure = true) {
         roadClosed.textContent = "There is currently road closures in your area.";
     } else {
         roadClosed.textContent = "There are currently no road closures in your area.";
