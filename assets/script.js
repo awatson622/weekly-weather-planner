@@ -116,7 +116,6 @@ function printResults(resultObj) {
         weatherBody.append(temp);
         weatherBody.append(clouds);
         weatherBody.append(windSpeed);
-        
         weatherCard.append(weatherBody);
         weatherContainer.appendChild(weatherCard);
       }
