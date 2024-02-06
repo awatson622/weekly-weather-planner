@@ -88,6 +88,7 @@ function printResults(resultObj) {
         weatherCard.classList.add('card');
         
         var weatherBody = document.createElement('div');
+        weatherBody.setAttribute('style', 'background-color: #c8c7ed');
         weatherBody.classList.add('card-body');
         
         var cardDateElement = document.createElement('h4');
