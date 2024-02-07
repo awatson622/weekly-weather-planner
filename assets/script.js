@@ -10,6 +10,7 @@ function updateDates() {
     days.forEach(function(day, index) {
         var dayHeader = day.querySelector('.day-header');
         var dateElement = document.createElement('div');
+        dateElement.style.fontWeight = 'bold';
         dateElement.classList.add ('date');
         var date = startOfWeek.add(index, 'day').format('dddd MMMM DD, YYYY');
 
@@ -100,6 +101,9 @@ function printResults(resultObj) {
         
         var iconImg = document.createElement('img');
         iconImg.src = iconUrl;
+
+        var rain = document.createElement('div');
+        rain.textContent = "Chance of rain: " + resultObj.pop*100 + "%";
         
         var temp = document.createElement('div');
         temp.textContent = "Temperature: " + resultObj.main.temp + "\u00B0 F";
@@ -114,6 +118,7 @@ function printResults(resultObj) {
         weatherBody.append(iconImg);
         weatherBody.append(temp);
         weatherBody.append(clouds);
+        weatherBody.append(rain);
         weatherBody.append(windSpeed);
         
         weatherCard.append(weatherBody);
