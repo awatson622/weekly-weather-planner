@@ -47,7 +47,9 @@
     </div>
   </div>  
     <form class="task-form">
+        <!--input box to enter weekly tasks-->
         <input id="task-input" type="text" placeholder="Enter weekly tasks here.">
+        <!--day selection drop down of which day to store the inputted task-->
         <select id="day-selection">
             <option value="" disabled selected>Select which day.</option>
             <option value="Sunday">Sunday</option>
@@ -58,9 +60,11 @@
             <option value="Friday">Friday</option>
             <option value="Saturday">Saturday</option>
         </select>
+        <!--confirm the inputted task and day-->
         <button id="confirm-task">Confirm?</button>
     </form>
 
+    <!--divs for each of the days of the week with sections to display  weather and road conditions-->
     <div id="sunday" class="day">
         <h3 class="day-header"></h3>
         <div class="weather-box">
