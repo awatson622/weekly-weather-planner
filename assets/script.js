@@ -50,7 +50,7 @@ function getParams() {
 //uses Open Weather api to get the name of a city inputed and return the latitude and longitude
 getLocation = function (cityName) {
     var apiEndpointLocation = 
-    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKeyOW;
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKeyOW;
 
 
     fetch(apiEndpointLocation)
