@@ -1,9 +1,15 @@
+//names the latitude and longitude variables
 var longitude;
 var latitude;
+//api  key for Open Weather site
 var apiKeyOW = "116b45a117c031423a95336301ac4350";
+//api key for TomTom site
 var apiKeyTT = "MEJtiG9BcewPsAMQr2nPUpuYTEeThwmY";
+//selects all the classes with the day tag
 var days = document.querySelectorAll('.day');
+//gets the current date in Dayjs
 var currentDate = dayjs();
+//lables the current date as the start of the week
 var startOfWeek = currentDate.startOf('week');
 var taskForm = document.querySelector('.task-form');
 var confirmTaskBtn = document.querySelector('#confirm-task');
@@ -18,6 +24,7 @@ var thursday = document.querySelector('.daily-tasks4');
 var friday = document.querySelector('.daily-tasks5');
 var saturday = document.querySelector('.daily-tasks6');
 
+// updates the dates using Dayjs to the current dates an adds styling
 function updateDates() {
     days.forEach(function(day, index) {
         var dayHeader = day.querySelector('.day-header');
@@ -33,13 +40,14 @@ function updateDates() {
 
 updateDates();
 
+//getting city name from Open Weather url
 function getParams() {
     var searchParameters = document.location.search.split('=');
     var cityName = searchParameters[1];
     getLocation(cityName);
 }
 
-
+//uses Open Weather api to get the name of a city inputed and return the latitude and longitude
 getLocation = function (cityName) {
     var apiEndpointLocation = 
     "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKeyOW;
@@ -57,6 +65,7 @@ getLocation = function (cityName) {
     });
 }
 
+//uses the Open Weather api to get the weather and display it as a console log
 function getWeather(latitude, longitude) {
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat='
     + latitude + '&lon=' + longitude + '&appid=' + apiKeyOW + '&units=imperial';
@@ -89,6 +98,7 @@ function getWeather(latitude, longitude) {
     })
 }
 
+//gets the data from the getWeather function and displays it on the correct days
 function printResults(resultObj) {
     var cardDate = resultObj.dt_txt.split(' ')[0];
     
@@ -139,11 +149,13 @@ function printResults(resultObj) {
     });
   }
 
+//gets appropriate weather icon from Open Weather
 function getWeatherIcon (weatherIcon) {
     var icon = 'https://openweathermap.org/img/wn/' + weatherIcon + "@2x.png";
     return icon;
 }
 
+//gets the traffic conditions from TomTom api displays as a console log
 function getTrafficCondition(latitude, longitude) {
     var roadConditions = "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/8/json?key=" + apiKeyTT + "&point=" 
     + latitude + "," + longitude + "&unit=mph&thickness=10&openLr=false&jsonp=jsonp";
@@ -163,6 +175,8 @@ function getTrafficCondition(latitude, longitude) {
     });
 }
 
+
+// takes the data from the getTrafficConditions function and displays the data on the html page in the current day
 function resultsTraffic(data) {
     var trafficContainer = document.querySelectorAll('.road-conditions');
 

@@ -1,3 +1,4 @@
+//modal for display page and getting the users city to use with the api's
 var enterCityModal=document.querySelector('#myModal');
 
 
