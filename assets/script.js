@@ -42,7 +42,7 @@ function getParams() {
 
 getLocation = function (cityName) {
     var apiEndpointLocation = 
-    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKeyOW;
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKeyOW;
 
 
     fetch(apiEndpointLocation)
