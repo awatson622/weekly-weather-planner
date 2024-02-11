@@ -17,12 +17,12 @@ var tasks = [];
 var daySelection;
 var daySelection = document.querySelector('#day-selection');
 var sunday = document.querySelector('.daily-tasks');
-var monday = document.querySelector('.daily-tasks1');
-var tuesday = document.querySelector('.daily-tasks2');
-var wednesday = document.querySelector('.daily-tasks3');
-var thursday = document.querySelector('.daily-tasks4');
-var friday = document.querySelector('.daily-tasks5');
-var saturday = document.querySelector('.daily-tasks6');
+var monday = document.querySelector('.daily-tasks2');
+var tuesday = document.querySelector('.daily-tasks3');
+var wednesday = document.querySelector('.daily-tasks4');
+var thursday = document.querySelector('.daily-tasks5');
+var friday = document.querySelector('.daily-tasks6');
+var saturday = document.querySelector('.daily-tasks7');
 
 // updates the dates using Dayjs to the current dates an adds styling
 function updateDates() {
@@ -211,7 +211,6 @@ function resultsTraffic(data) {
 
 function pushTask(event) {
     event.preventDefault();
-
     var taskInput = document.querySelector('#task-input').value;
     var daySelection = document.querySelector('#day-selection').value;
     var taskContainer = document.createElement('ul');
@@ -220,7 +219,7 @@ function pushTask(event) {
     taskContainer.append(taskInput);
 
     storeTasks(taskInput, daySelection);
-    
+
     if (taskInput === '') {
         return;
     }
@@ -240,23 +239,40 @@ function pushTask(event) {
     } else {
         saturday.appendChild(taskContainer);
     }
-}
-
+    }
+  
 function storeTasks(taskInput, daySelection) {
-    var storedTasks = JSON.parse(localStorage.getItem('tasks')) || {};
-    storedTasks.taskInput = taskInput;
-    storedTasks.daySelection = daySelection;
+    var storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    var newTask = {
+        taskInput: taskInput,
+        daySelection: daySelection
+    };
+    storedTasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(storedTasks));
 }
   
 function getTasks() {
     var storedTasks = JSON.parse(localStorage.getItem('tasks'));
-  
+
     if (storedTasks !== null) {
-        pushTask(storedTasks.taskInput, storedTasks.daySelection);
-    }
+        storedTasks.forEach(function(task) {
+        var taskInput = task.taskInput;
+        var daySelection = task.daySelection;
+
+        var taskContainer = document.createElement('ul');
+        taskContainer.setAttribute('style', 'text-align: center');
+        taskContainer.value = taskInput;
+        taskContainer.append(taskInput);
+
+        if (taskInput !== '' && daySelection !== '') {
+            var dayContainer = document.getElementById(daySelection.toLowerCase());
+            dayContainer.appendChild(taskContainer);
+        }
+        });
+}
 }
 
+window.addEventListener('load', getTasks);
 confirmTaskBtn.addEventListener('click', pushTask);
 
 getParams();
